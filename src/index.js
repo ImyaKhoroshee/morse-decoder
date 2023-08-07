@@ -34,11 +34,22 @@ const MORSE_TABLE = {
     '--...':  '7',
     '---..':  '8',
     '----.':  '9',
-    '-----':  '0',
+    '-----': '0',
+    '**********': ' ',
 };
 
 function decode(expr) {
-    // write your solution here
+    let arrOfSymbols = [];
+
+    for (var i = 0; i < expr.length; i+=10) {
+        arrOfSymbols.push(expr.slice(i, i + 10));
+    }
+    return arrOfSymbols
+        .map(elem => elem.replace(/^0+/, '')
+        .replace(/10/g, '.')
+        .replace(/11/g, '-'))
+        .map(element => MORSE_TABLE[element])
+        .join('');
 }
 
 module.exports = {
